@@ -3,7 +3,7 @@
     /* Basic Options */
     "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     "declarationDir": "./dist/types",
-    "outDir": "./dist/src",
+    "outDir": "./dist",
     "rootDir": "./src",/* Redirect output structure to the directory. */
     "composite": true,                     /* Enable project compilation */
     "strict": true,                           /* Enable all strict type-checking options. */

@@ -8,7 +8,7 @@
   "author": "Oded Leiba <oded@kzencorp.com>",
   "license": "GPL-3.0",
   "scripts": {
-    "start-p1-server": "node ./demo/party1.js",
+    "start-p1-server": "ts-node ./demo/party1.ts",
     "clean": "rm -rf dist",
     "build-rust": "neon build -r",
     "build-ts": "tsc",
@@ -25,7 +25,7 @@
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "ts-mocha": "^7.0.0",
-    "ts-node": "^8.1.0",
+    "ts-node": "^8.10.2",
     "tslib": "^1.9.3",
     "typescript": "^3.4.5"
   },

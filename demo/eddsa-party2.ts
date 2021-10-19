@@ -1,6 +1,6 @@
-const { Ed25519Party2 } = require('../dist');
-const crypto = require('crypto');
-const EdDSA = require('elliptic').eddsa;
+import { Ed25519Party2 } from "../src";
+import crypto from "crypto";
+import { eddsa as EdDSA } from "elliptic";
 const eddsa = new EdDSA('ed25519');
 
 const P1_ENDPOINT = 'http://localhost:8000';

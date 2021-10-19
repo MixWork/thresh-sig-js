@@ -1,5 +1,5 @@
-const { EcdsaParty2 } = require('../dist');
-const crypto = require('crypto');
+import { EcdsaParty2 } from "../src";
+import crypto from "crypto";
 
 const P1_ENDPOINT = 'http://localhost:8000';
 

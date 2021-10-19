@@ -1,0 +1,6 @@
+/node_modules
+/native/target/release
+/native/index.node
+/dist
+/db
+/tsconfig.tsbuildinfo

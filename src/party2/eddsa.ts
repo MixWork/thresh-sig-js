@@ -1,5 +1,5 @@
 const path = require('path');
-const bindings : any = require(path.join(__dirname, '../../../native'));
+const bindings : any = require(path.join(__dirname, '../../native'));
 import {BigInt, toLittleEndian} from "../common";
 import util from 'util';
 bindings.p2_eddsa_generate_key = util.promisify(bindings.p2_eddsa_generate_key);
