@@ -1,7 +1,6 @@
 import {bindings} from "../bindings";
 import RocksDB from 'rocksdb';
 import util from "util";
-import path from "path";
 
 export class Party1 {
 

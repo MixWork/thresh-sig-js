@@ -1,9 +1,5 @@
-const path = require('path');
-const bindings : any = require(path.join(__dirname, '../../native'));
+import { bindings} from '../bindings';
 import {GE, FE, FE_BYTES_SIZE} from "../common";
-import util from 'util';
-bindings.p2_schnorr_generate_key = util.promisify(bindings.p2_schnorr_generate_key);
-bindings.p2_schnorr_sign = util.promisify(bindings.p2_schnorr_sign);
 
 import {curve, ec as EC} from 'elliptic';
 const CURVE = "secp256k1";
@@ -70,12 +66,12 @@ export class SchnorrParty2 {
     }
 
     public async generateKey(): Promise<SchnorrParty2Share> {
-        const res = JSON.parse(await bindings.p2_schnorr_generate_key(this.party1Endpoint));
+        const res = JSON.parse(await bindings.p2_schnorr_generate_key_promisify(this.party1Endpoint));
         return SchnorrParty2Share.fromPlain(res);
     }
 
     public async sign(msgHash: Buffer, share: SchnorrParty2Share): Promise<SchnorrSignature> {
-        const res = JSON.parse(await bindings.p2_schnorr_sign(
+        const res = JSON.parse(await bindings.p2_schnorr_sign_promisify(
             this.party1Endpoint,
             JSON.stringify(msgHash.toString('hex')),
             JSON.stringify(share)));

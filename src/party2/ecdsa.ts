@@ -1,9 +1,5 @@
-const path = require('path');
-const bindings : any = require(path.join(__dirname, '../../native'));
+import { bindings} from '../bindings';
 import {BigInt, EncryptionKey, FE, FE_BYTES_SIZE, GE, stringifyHex} from '../common';
-import util from 'util';
-bindings.p2_ecdsa_generate_master_key = util.promisify(bindings.p2_ecdsa_generate_master_key);
-bindings.p2_ecdsa_sign = util.promisify(bindings.p2_ecdsa_sign);
 
 import {curve, ec as EC} from 'elliptic';
 const CURVE = "secp256k1";
@@ -75,7 +71,7 @@ export class EcdsaParty2 {
     }
 
     public async generateMasterKey(): Promise<EcdsaParty2Share> {
-        const res = JSON.parse(await bindings.p2_ecdsa_generate_master_key(this.party1Endpoint));
+        const res = JSON.parse(await bindings.p2_ecdsa_generate_master_key_promisify(this.party1Endpoint));
         return EcdsaParty2Share.fromPlain(res);
     }
 
@@ -88,7 +84,7 @@ export class EcdsaParty2 {
     }
 
     public async sign(msgHash: Buffer, childPartyTwoShare: EcdsaParty2Share, xPos: number, yPos: number): Promise<EcdsaSignature> {
-        const res = JSON.parse(await bindings.p2_ecdsa_sign(
+        const res = JSON.parse(await bindings.p2_ecdsa_sign_promisify(
             this.party1Endpoint,
             JSON.stringify(msgHash.toString('hex')),
             JSON.stringify(childPartyTwoShare),

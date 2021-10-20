@@ -1,9 +1,5 @@
-const path = require('path');
-const bindings : any = require(path.join(__dirname, '../../native'));
+import { bindings} from '../bindings';
 import {BigInt, toLittleEndian} from "../common";
-import util from 'util';
-bindings.p2_eddsa_generate_key = util.promisify(bindings.p2_eddsa_generate_key);
-bindings.p2_eddsa_sign = util.promisify(bindings.p2_eddsa_sign);
 
 const SCALAR_BYTES_SIZE = 32;
 const POINT_BYTES_SIZE = 32;
@@ -92,12 +88,12 @@ export class Ed25519Party2 {
     }
 
     public async generateKey(): Promise<Ed25519Party2Share> {
-        const res = JSON.parse(await bindings.p2_eddsa_generate_key(this.party1Endpoint));
+        const res = JSON.parse(await bindings.p2_eddsa_generate_key_promisify(this.party1Endpoint));
         return Ed25519Party2Share.fromPlain(res);
     }
 
     public async sign(msgHash: Buffer, share: Ed25519Party2Share): Promise<Ed25519Signature> {
-        const res = JSON.parse(await bindings.p2_eddsa_sign(
+        const res = JSON.parse(await bindings.p2_eddsa_sign_promisify(
             this.party1Endpoint,
             JSON.stringify(msgHash.toString('hex')),
             JSON.stringify(share.getKeyPair()),
